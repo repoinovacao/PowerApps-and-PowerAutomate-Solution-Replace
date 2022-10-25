@@ -59,25 +59,34 @@ function ParseFilesNFolders{
                     $msappFileName = [System.IO.Path]::GetFileNameWithoutExtension("$thisFolder\$content")
                     New-Item -Path ".\Temp\$newSolutionFolder" -Name $msappFileName -ItemType "directory" | Out-Null
 
-                    Copy-Item "$thisFolder\$content" -Destination ".\Temp\$newSolutionFolder\$content"
-                    Rename-Item ".\Temp\$newSolutionFolder\$content" "$msappFileName.zip"
-
-                    Expand-Archive ".\Temp\$newSolutionFolder\$msappFileName.zip" -DestinationPath ".\Temp\$newSolutionFolder\$msappFileName"
-                    Write-Host "Exctracted into .\Temp\$newSolutionFolder\$msappFileName"
-                    Remove-Item -Path ".\Temp\$newSolutionFolder\$msappFileName.zip" -Force
+                    Copy-Item "$thisFolder\$content" -Destination ".\Temp\$newSolutionFolder\$content"                    
+					pac canvas unpack --msapp ".\Temp\$newSolutionFolder\$content" --sources ".\Temp\$newSolutionFolder\$msappFileName"
+					
+                    Write-Host "Exctracted into .\Temp\$newSolutionFolder\$msappFileName"                    
                     Remove-Item -Path "$thisFolder\$content" -Force
 
                     ParseFilesNFolders -thisFolder ".\Temp\$newSolutionFolder\$msappFileName"
 
-                    Write-Host "Compress .\Temp\$newSolutionFolder\$msappFileName folder and save it into $thisFolder"
-                    Compress-Archive -Path ".\Temp\$newSolutionFolder\$msappFileName\*" -DestinationPath "$thisFolder\$msappFileName.zip"
-                    Write-Host "Rename $msappFileName.zip into $content"
-                    Rename-Item "$thisFolder\$msappFileName.zip" "$content"
+                    Write-Host "Compress .\Temp\$newSolutionFolder\$msappFileName folder and save it into $thisFolder"                    
+					pac canvas pack --msapp "$thisFolder\$content" --sources ".\Temp\$newSolutionFolder\$msappFileName"                    
                     Write-Host "$content regenerated" -ForegroundColor Green
 
                 }
+				".xml"{
+                    
+					if ( "$content" -eq "customizations.xml")  
+					{
+					   Write-Host "Replacing XML file in $thisFolder\$content"
+					   EditFileTemplate "$thisFolder\$content"
+					}
+					else 
+					{
+						Write-Host "Skip XML file in $thisFolder\$content"
+					}                   
+                    
+                }
                 Default{
-                    Write-Host "Default : $ext"
+                    Write-Host "Default : $ext"										
                 }
             }
         }

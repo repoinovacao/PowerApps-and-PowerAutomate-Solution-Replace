@@ -1,26 +1,14 @@
 [
 	{
-		"old": "https://MY OLD SHAREPOINT URL",
-		"new": "https://MY NEW SHAREPOINT URL"
+		"old": "8548b487-5939-4d50-a1e4-28a14ea59981",
+		"new": "ff0edf3b-cb27-4a10-8448-aaa820df0eeb"
 	},
 	{
-		"old": "SiteExempleTitle",
-		"new": "SiteExempleTitle2"
+		"old": "https://6crhjb-my.sharepoint.com/personal/admin_6crhjb_onmicrosoft_com",
+		"new": "https://bndesbr-my.sharepoint.com/personal/josej_bndes_gov_br"
 	},
 	{
-		"old": "ExemplFlowTitle",
-		"new": "ExemplFlowTitle2"
-	},
-	{
-		"old": "00000000-0000-0000-0000-000000000000",
-		"new": "11111111-1111-1111-1111-111111111111"
-	},
-	{
-		"old": "0x0100111111111111111111111111111111111111111111111111111111111111111111",
-		"new": "0x0100222222222222222222222222222222222222222222222222222222222222222222"
+		"old": "/personal/admin_6crhjb_onmicrosoft_com",
+		"new": "/personal/josej_bndes_gov_br"
 	}
 ]
-
-
-
-
